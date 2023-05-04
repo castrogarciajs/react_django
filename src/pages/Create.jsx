@@ -11,7 +11,10 @@ export function CreatePage() {
   const description = register("description", { required: true });
 
   const onHandleSubmit = handleSubmit(async (data) => {
-    await CREATE(data);
+    if (params.id) {
+    } else {
+      await CREATE(data);
+    }
     redirect("/");
   });
   return (
