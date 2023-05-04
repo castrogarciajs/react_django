@@ -1,5 +1,11 @@
 import { Task } from "./Task";
 
 export function Tasks({ data }) {
-  return <Task data={data} />;
+  return (
+    <>
+      {data.map((task) => (
+        <Task data={task} key={task.id} />
+      ))}
+    </>
+  );
 }
