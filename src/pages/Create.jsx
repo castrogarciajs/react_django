@@ -1,15 +1,17 @@
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import { create } from "../api/api";
 
 export function CreatePage() {
   const { register, handleSubmit } = useForm();
+  const redirect = useNavigate();
 
   const title = register("title", { required: true });
   const description = register("description", { required: true });
 
   const onHandleSubmit = handleSubmit(async (data) => {
-    const response = await create(data);
-    console.log(response);
+    await create(data);
+    redirect("/");
   });
   return (
     <div>

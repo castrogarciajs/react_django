@@ -1,9 +1,7 @@
-export function Task({ data }) {
+export function Task({ task }) {
   return (
     <div>
-      {data.map((task) => (
-        <h2>{task.title}</h2>
-      ))}
+      <h2>{task.title}</h2>
     </div>
   );
 }
