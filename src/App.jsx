@@ -11,6 +11,7 @@ function App() {
         <Route path="/" element={<Navigate to="/Tasks" />} />
         <Route path="/Tasks" element={<HomePage />} />
         <Route path="/Create" element={<CreatePage />} />
+        <Route path="/Create/:id" element={<CreatePage />} />
       </Routes>
     </>
   );
