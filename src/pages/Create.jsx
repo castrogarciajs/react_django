@@ -1,6 +1,7 @@
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useParams, useNavigate } from "react-router-dom";
-import { CREATE, DELETE } from "../api/api";
+import { CREATE, DELETE, UPDATE } from "../api/api";
 
 export function CreatePage() {
   const { register, handleSubmit } = useForm();
@@ -12,10 +13,15 @@ export function CreatePage() {
 
   const onHandleSubmit = handleSubmit(async (data) => {
     if (params.id) {
+      UPDATE(params.id);
     } else {
       await CREATE(data);
     }
     redirect("/");
+  });
+
+  useEffect(() => {
+    const load = () => {};
   });
   return (
     <div>
