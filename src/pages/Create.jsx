@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { useParams, useNavigate } from "react-router-dom";
-import { CREATE } from "../api/api";
+import { CREATE, DELETE } from "../api/api";
 
 export function CreatePage() {
   const { register, handleSubmit } = useForm();
@@ -26,7 +26,20 @@ export function CreatePage() {
 
         <button type="submit">Guardar</button>
       </form>
-      {params.id && <button>DELETE</button>}
+      {params.id && (
+        <button
+          onClick={async () => {
+            const res = confirm("Estas seguro ?");
+
+            if (res) {
+              await DELETE(params.id);
+              redirect("/");
+            }
+          }}
+        >
+          DELETE
+        </button>
+      )}
     </div>
   );
 }
