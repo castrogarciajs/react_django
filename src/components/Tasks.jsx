@@ -1,3 +1,5 @@
-export function Tasks() {
-  return <h2>react mode</h2>;
+import { Task } from "./Task";
+
+export function Tasks({ data }) {
+  return <Task data={data} />;
 }
