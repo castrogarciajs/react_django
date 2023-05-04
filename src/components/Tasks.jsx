@@ -4,7 +4,7 @@ export function Tasks({ data }) {
   return (
     <>
       {data.map((task) => (
-        <Task data={task} key={task.id} />
+        <Task task={task} key={task.id} />
       ))}
     </>
   );
