@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useParams, useNavigate } from "react-router-dom";
-import { CREATE, DELETE, UPDATE } from "../api/api";
+import { CREATE, DELETE, UPDATE, LIKE } from "../api/api";
 
 export function CreatePage() {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, setValue } = useForm();
   const redirect = useNavigate();
   const params = useParams();
 
@@ -13,7 +13,7 @@ export function CreatePage() {
 
   const onHandleSubmit = handleSubmit(async (data) => {
     if (params.id) {
-      UPDATE(params.id);
+      UPDATE(params.id, data);
     } else {
       await CREATE(data);
     }
@@ -21,7 +21,15 @@ export function CreatePage() {
   });
 
   useEffect(() => {
-    const load = () => {};
+    const load = async () => {
+      if (params.id) {
+        const res = await LIKE(params.id);
+
+        setValue("title", res.data.title);
+        setValue("description", res.data.description);
+      }
+    };
+    load();
   });
   return (
     <div>
@@ -29,11 +37,11 @@ export function CreatePage() {
         <input type="text" placeholder="Ingresa un titulo" {...title} />
         <textarea
           rows={3}
-          placeholder="ingresa una desscription"
+          placeholder="ingresa una description"
           {...description}
         ></textarea>
 
-        <button type="submit">Guardar</button>
+        <button type="submit">{params.id ? "UPDATE" : "CREATE"}</button>
       </form>
       {params.id && (
         <button
