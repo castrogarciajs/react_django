@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { get } from "../api/api";
+import { GET } from "../api/api";
 import { Tasks } from "../components/Tasks";
 
 export function HomePage() {
@@ -7,7 +7,7 @@ export function HomePage() {
 
   useEffect(() => {
     async function start() {
-      const response = await get();
+      const response = await GET();
 
       setTasks(response.data);
     }

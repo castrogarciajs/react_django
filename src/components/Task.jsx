@@ -1,9 +1,16 @@
-export function Task({ data }) {
+import { useNavigate } from "react-router-dom";
+
+export function Task({ task }) {
+  const redirect = useNavigate();
   return (
     <div>
-      {data.map((task) => (
-        <h2>{task.title}</h2>
-      ))}
+      <h2
+        onClick={() => {
+          redirect(`/Create/${task.id}`);
+        }}
+      >
+        {task.title}
+      </h2>
     </div>
   );
 }
